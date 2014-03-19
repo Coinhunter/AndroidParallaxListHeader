@@ -12,13 +12,18 @@ import android.widget.LinearLayout;
 import android.widget.ImageView.ScaleType;
 import android.widget.ListView;
 
+/**
+ * @author britzl (Björn Ritzl)
+ * @author Coinhunter (Conrad Ljungström)
+ * @link http://www.springworks.se
+ */
 public class ParallaxImage {
 	private ImageView imageView;
 	private ListView listView;
 	private Context context;
 	
 	// The operational mode of the scrolllist. 
-	private int mode;
+	private Modes mode;
 	
 	// The width of the screen.
 	private int displayWidth;
@@ -36,7 +41,7 @@ public class ParallaxImage {
 		this.listView = listView;
 		this.imageView = headerImage;
 		this.context = context;
-		this.mode = mode.ordinal();
+		this.mode = mode;
 		
 		setDisplayWidth();
 		setImageHeight();
@@ -116,11 +121,11 @@ public class ParallaxImage {
 		Matrix matrix = new Matrix();
 		matrix.postScale(scale, scale);
 		
-		if (this.mode == Modes.NONE.ordinal()) {
+		if (this.mode == Modes.NONE) {
 			//Do nothing. This image will behave as any other.
-		} else if (this.mode == Modes.FOLD.ordinal()) {
+		} else if (this.mode == Modes.FOLD) {
 			matrix.postTranslate(0, -scroll / 2);
-		} else if (this.mode == Modes.BELOW.ordinal()) {
+		} else if (this.mode == Modes.BELOW) {
 			matrix.postTranslate(0, -scroll);
 		}
 
